@@ -1,33 +1,44 @@
 package hexlet.code;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import picocli.CommandLine;
 import picocli.CommandLine.Command;
 import picocli.CommandLine.Option;
 import picocli.CommandLine.Parameters;
 
-import java.io.File;
+import java.util.concurrent.Callable;
 
 @Command(name = "gendiff", description = "Compares two configuration files and shows a difference.")
 
-public class App {
+public class App implements Callable<Integer> {
 
     @Parameters(paramLabel = "filepath1", description = "path to first file")
-    File file1;
+    static
+    String path1;
 
     @Parameters(paramLabel = "filepath2", description = "path to second file")
-    File file2;
+    static
+    String path2;
 
     @Option(names = {"-f", "--format"}, defaultValue = "stylish",
             description = "output format (default: stylish)")
     String format;
 
     @Option(names = {"-h", "--help"}, usageHelp = true, description = "Show this help message and exit.")
-    private boolean usageHelpRequested = false;
+    boolean usageHelpRequested = false;
 
     @Option(names = {"-V", "--version"}, versionHelp = true, description = "Print version information and exit.")
     boolean versionInfoRequested;
 
-    public static void main(String[] args) {
+
+
+    @Override
+    public Integer call() throws Exception {
+        System.out.println(Differ.generate(path1, path2));
+        return null;
+    }
+
+    public static void main(String[] args) throws Exception {
         App app = CommandLine.populateCommand(new App(), args);
         CommandLine commandLine = new CommandLine(new App());
         commandLine.parseArgs(args);
@@ -38,6 +49,6 @@ public class App {
             commandLine.printVersionHelp(System.out);
             return;
         }
-        System.out.println("Hello World!");
+        System.out.println(Differ.generate(path1, path2));
     }
 }
