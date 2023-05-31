@@ -1,6 +1,5 @@
 package hexlet.code;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import picocli.CommandLine;
 import picocli.CommandLine.Command;
 import picocli.CommandLine.Option;
@@ -14,15 +13,13 @@ public class App implements Callable<Integer> {
 
     @Parameters(paramLabel = "filepath1", description = "path to first file")
     static
-    String path1;
-
+        String path1;
     @Parameters(paramLabel = "filepath2", description = "path to second file")
     static
-    String path2;
-
+        String path2;
     @Option(names = {"-f", "--format"}, defaultValue = "stylish",
             description = "output format (default: stylish)")
-    String format;
+        String format;
 
     @Option(names = {"-h", "--help"}, usageHelp = true, description = "Show this help message and exit.")
     boolean usageHelpRequested = false;

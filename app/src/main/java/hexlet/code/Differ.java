@@ -1,7 +1,6 @@
 package hexlet.code;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-
 import java.io.File;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -12,8 +11,8 @@ import java.util.TreeSet;
 
 public class Differ {
     public static String generate(String filepath1, String filepath2) throws Exception {
-        Map <String, Object> map1 = getData(filepath1);
-        Map <String, Object> map2 = getData(filepath2);
+        Map<String, Object> map1 = getData(filepath1);
+        Map<String, Object> map2 = getData(filepath2);
 
         StringBuilder sb = new StringBuilder("{ \n");
 
