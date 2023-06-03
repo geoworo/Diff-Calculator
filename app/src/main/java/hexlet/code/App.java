@@ -35,7 +35,7 @@ public class App implements Callable<Integer> {
         return null;
     }
 
-    public static void main(String[] args) throws Exception {
+    public static void main(String[] args) {
         App app = CommandLine.populateCommand(new App(), args);
         CommandLine commandLine = new CommandLine(new App());
         commandLine.parseArgs(args);
@@ -46,6 +46,7 @@ public class App implements Callable<Integer> {
             commandLine.printVersionHelp(System.out);
             return;
         }
-        System.out.println(Differ.generate(path1, path2));
+        int exitCode = new CommandLine(new App()).execute(args);
+        System.exit(exitCode);
     }
 }
