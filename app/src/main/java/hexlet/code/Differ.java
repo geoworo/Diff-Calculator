@@ -5,16 +5,14 @@ import java.io.File;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.Map;
-import java.util.SortedSet;
-import java.util.TreeSet;
+import java.util.*;
 
 public class Differ {
     public static String generate(String filepath1, String filepath2) throws Exception {
         Map<String, Object> map1 = getData(filepath1);
         Map<String, Object> map2 = getData(filepath2);
 
-        StringBuilder sb = new StringBuilder("{ \n");
+        StringBuilder sb = new StringBuilder("{\n");
 
         SortedSet<String> keys = new TreeSet<>(map1.keySet());
         keys.addAll(map2.keySet());
@@ -38,15 +36,17 @@ public class Differ {
 
     public static Map<String, Object> getData(String filepath) throws Exception {
         ObjectMapper mapper = new ObjectMapper();
+        Map<String, Object> mapresult = new HashMap<>();
 
         Path path = Paths.get(filepath).toAbsolutePath().normalize();
-        if (!Files.exists(path)) {
-            throw new Exception("File " + filepath + " does not exist.");
-        }
+
         File file = new File(String.valueOf(path));
 
-        Map<String, Object> mapresult = mapper.readValue(file, Map.class);
+        if (file.length() == 0) {
+            throw new Exception("File " + filepath + " does not exist or is empty.");
+        }
 
+        mapresult = mapper.readValue(file, Map.class);
         return mapresult;
     }
 }
