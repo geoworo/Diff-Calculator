@@ -1,6 +1,7 @@
-.PHONY: build
 run-dist:
-	./build/install/app/bin/app
+	make -C app run-dist
 
 report:
 	make -C app report
+
+.PHONY: build
