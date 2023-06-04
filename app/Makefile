@@ -2,5 +2,5 @@
 run-dist:
 	./build/install/app/bin/app
 
-test-coverage:
+report:
 	make -C app report
