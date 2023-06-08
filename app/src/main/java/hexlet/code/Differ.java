@@ -1,10 +1,5 @@
 package hexlet.code;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import java.io.File;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.util.HashMap;
 import java.util.Map;
 import java.util.SortedSet;
 import java.util.TreeSet;
@@ -12,8 +7,8 @@ import java.util.TreeSet;
 
 public class Differ {
     public static String generate(String filepath1, String filepath2) throws Exception {
-        Map<String, Object> map1 = getData(filepath1);
-        Map<String, Object> map2 = getData(filepath2);
+        Map<String, Object> map1 = Parser.parse(filepath1);
+        Map<String, Object> map2 = Parser.parse(filepath2);
 
         StringBuilder sb = new StringBuilder("{\n");
 
@@ -35,21 +30,5 @@ public class Differ {
         }
         sb.append("}");
         return sb.toString();
-    }
-
-    public static Map<String, Object> getData(String filepath) throws Exception {
-        ObjectMapper mapper = new ObjectMapper();
-        Map<String, Object> mapresult = new HashMap<>();
-
-        Path path = Paths.get(filepath).toAbsolutePath().normalize();
-
-        File file = new File(String.valueOf(path));
-
-        if (file.length() == 0) {
-            throw new Exception("File " + filepath + " does not exist or is empty.");
-        }
-
-        mapresult = mapper.readValue(file, Map.class);
-        return mapresult;
     }
 }
