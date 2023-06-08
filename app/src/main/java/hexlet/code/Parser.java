@@ -20,7 +20,7 @@ public class Parser {
 
         String fileName = file.getName();
         int index = fileName.lastIndexOf('.');
-        if (index <= 0 ) {
+        if (index <= 0) {
             throw new Exception("File " + path + " format is not specified.");
         }
 
