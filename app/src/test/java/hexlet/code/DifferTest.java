@@ -28,10 +28,12 @@ public class DifferTest {
         String expected1 = "{\n   count: 3\n - country: Colombia\n + date: 1720\n";
         expected1 = expected1 + " - items: rum, pirates, ships\n + items: ships\n}";
         assertEquals(expected1, Differ.generate("src/test/resources/ffile.json", "src/test/resources/sfile.json"));
+        assertEquals(expected1, Differ.generate("src/test/resources/yaml1.yml", "src/test/resources/syaml1.yml"));
 
         String expected2 = "{\n   age: 23\n   firstName: Kyle\n";
         expected2 = expected2 + "   id: 1234567\n   middleName: Connor\n   secondName: Black\n}";
         assertEquals(expected2, Differ.generate("src/test/resources/ffile1.json", "src/test/resources/sfile1.json"));
+        assertEquals(expected2, Differ.generate("src/test/resources/yaml2.yml", "src/test/resources/syaml2.yml"));
 
     }
 }

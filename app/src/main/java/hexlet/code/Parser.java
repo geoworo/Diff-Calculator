@@ -1,9 +1,11 @@
 package hexlet.code;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.dataformat.yaml.YAMLMapper;
+import org.yaml.snakeyaml.Yaml;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Map;
@@ -36,9 +38,10 @@ public class Parser {
         }
     }
 
-    public static Map<String, Object> getYAML(File file) throws Exception {
-        ObjectMapper mapper = new YAMLMapper();
-        return mapper.readValue(file, Map.class);
+    public static Map<String, Object> getYAML(File file) throws FileNotFoundException {
+        Yaml yaml = new Yaml();
+        Map<String, Object> result = (Map<String, Object>) yaml.load(new FileInputStream(file));
+        return result;
     }
 
     public static Map<String, Object> getJSON(File file) throws Exception {
