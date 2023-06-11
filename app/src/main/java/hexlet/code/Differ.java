@@ -1,34 +1,40 @@
 package hexlet.code;
 
-import java.util.Map;
 import java.util.SortedSet;
+import java.util.Map;
+import java.util.SortedMap;
 import java.util.TreeSet;
-
+import java.util.TreeMap;
 
 public class Differ {
-    public static String generate(String filepath1, String filepath2) throws Exception {
+    public static String generate(String filepath1, String filepath2, String format) throws Exception {
         Map<String, Object> map1 = Parser.parse(filepath1);
         Map<String, Object> map2 = Parser.parse(filepath2);
 
-        StringBuilder sb = new StringBuilder("{\n");
+        SortedSet<String> sum = new TreeSet<>(map1.keySet());
+        sum.addAll(map2.keySet());
 
-        SortedSet<String> keys = new TreeSet<>(map1.keySet());
-        keys.addAll(map2.keySet());
+        SortedMap<String, String> result = new TreeMap<>();
 
-        for (String key: keys) {
+        for (String key: sum) {
 
             if (!map1.containsKey(key)) {
-                sb.append(" + " + key + ": " + map2.get(key) + "\n");
+                result.put(key + "/a", (map2.get(key)).toString());
+                // a = added
             } else if (!map2.containsKey(key)) {
-                sb.append(" - " + key + ": " + map1.get(key) + "\n");
+                result.put(key + "/d", (map1.get(key)).toString());
+                // d = deleted
             } else if (map1.get(key).equals(map2.get(key))) {
-                sb.append("   " + key + ": " + map1.get(key) + "\n");
+                result.put(key + "/u", (map1.get(key)).toString());
+                // u = unchanged
             } else {
-                sb.append(" - " + key + ": " + map1.get(key) + "\n");
-                sb.append(" + " + key + ": " + map2.get(key) + "\n");
+                result.put(key + "/c", (map1.get(key)).toString() + "/" + (map2.get(key)).toString());
+                // c = changed
             }
+
         }
-        sb.append("}");
-        return sb.toString();
+
+        return Formatter.format(result, format);
+
     }
 }
