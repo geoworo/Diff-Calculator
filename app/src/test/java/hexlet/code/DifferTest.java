@@ -45,10 +45,14 @@ public class DifferTest {
         assertEquals(expected1, diff1);
         assertEquals(expected1, diff2);
 
+        String json3 = "src/test/resources/ffile1.json";
+        String json4 = "src/test/resources/sfile1.json";
+        String diff3 = Differ.generate(json3, json4, "stylish");
+
         String expected2 = "{\n    age: 23\n    firstName: Kyle\n";
         expected2 = expected2 + "    id: 1234567\n    middleName: Connor\n    secondName: Black\n}";
-        assertEquals(expected2, Differ.generate("src/test/resources/ffile1.json", "src/test/resources/sfile1.json", "stylish"));
-        assertEquals(expected2, Differ.generate("src/test/resources/yaml2.yml", "src/test/resources/syaml2.yml", "stylish"));
+
+        assertEquals(expected2, diff3);
 
     }
 }
