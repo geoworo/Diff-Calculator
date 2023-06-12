@@ -25,8 +25,11 @@ public class DifferTest {
         assertTrue(actualMessage.contains(expectedMessage));
         assertTrue(actualMessage2.contains(expectedMessage2));
 
-        String expected1 = "{\n    count: 3\n  - country: Colombia\n  + date: 1720\n";
-        expected1 = expected1 + "  - items: rum, pirates, ships\n  + items: ships\n}";
+        StringBuilder sb = new StringBuilder();
+        sb.append("{\n  - oceans: [Pacific, Atlantic, Indian, Southern, Arctic]\n  + oceans: [North Atlantic, Indian, Pacific]\n");
+        sb.append("  - period: {beginning=1500, end=1830}\n  + period: {beginning=1650, end=1730}\n  + pirates: [Henry Every, Anne Bonny]\n");
+        sb.append("  - region: the Caribbean\n    topic: piracy\n}");
+        String expected1 = sb.toString();
         assertEquals(expected1, Differ.generate("src/test/resources/ffile.json", "src/test/resources/sfile.json", "stylish"));
         assertEquals(expected1, Differ.generate("src/test/resources/yaml1.yml", "src/test/resources/syaml1.yml", "stylish"));
 

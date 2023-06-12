@@ -1,6 +1,14 @@
 ---
-count: 3
-items: rum, pirates, ships
-country: Colombia
+topic: piracy
+oceans:
+  - Pacific
+  - Atlantic
+  - Indian
+  - Southern
+  - Arctic
+period:
+  beginning: 1500
+  end: 1830
+region: the Caribbean
 ...
 

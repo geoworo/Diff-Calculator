@@ -1,5 +1,13 @@
 ---
-count: 3
-items: ships
-date: 1720
+topic: piracy
+oceans:
+  - North Atlantic
+  - Indian
+  - Pacific
+period:
+  beginning: 1650
+  end: 1730
+pirates:
+  - Henry Every
+  - Anne Bonny
 ...
