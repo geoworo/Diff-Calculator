@@ -25,13 +25,25 @@ public class DifferTest {
         assertTrue(actualMessage.contains(expectedMessage));
         assertTrue(actualMessage2.contains(expectedMessage2));
 
-        StringBuilder sb = new StringBuilder();
-        sb.append("{\n  - oceans: [Pacific, Atlantic, Indian, Southern, Arctic]\n  + oceans: [North Atlantic, Indian, Pacific]\n");
-        sb.append("  - period: {beginning=1500, end=1830}\n  + period: {beginning=1650, end=1730}\n  + pirates: [Henry Every, Anne Bonny]\n");
+        String json1 = "src/test/resources/ffile.json";
+        String json2 = "src/test/resources/sfile.json";
+        String yaml1 = "src/test/resources/yaml1.yml";
+        String yaml2 = "src/test/resources/syaml1.yml";
+
+        String diff1 = Differ.generate(json1, json2, "stylish");
+        String diff2 = Differ.generate(yaml1, yaml2, "stylish");
+
+        StringBuilder sb = new StringBuilder("{\n");
+        sb.append("  - oceans: [Pacific, Atlantic, Indian, Southern, Arctic]\n");
+        sb.append("  + oceans: [North Atlantic, Indian, Pacific]\n");
+        sb.append("  - period: {beginning=1500, end=1830}\n");
+        sb.append("  + period: {beginning=1650, end=1730}\n");
+        sb.append("  + pirates: [Henry Every, Anne Bonny]\n");
         sb.append("  - region: the Caribbean\n    topic: piracy\n}");
         String expected1 = sb.toString();
-        assertEquals(expected1, Differ.generate("src/test/resources/ffile.json", "src/test/resources/sfile.json", "stylish"));
-        assertEquals(expected1, Differ.generate("src/test/resources/yaml1.yml", "src/test/resources/syaml1.yml", "stylish"));
+
+        assertEquals(expected1, diff1);
+        assertEquals(expected1, diff2);
 
         String expected2 = "{\n    age: 23\n    firstName: Kyle\n";
         expected2 = expected2 + "    id: 1234567\n    middleName: Connor\n    secondName: Black\n}";
