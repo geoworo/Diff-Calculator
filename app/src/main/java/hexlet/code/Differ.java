@@ -1,7 +1,10 @@
 package hexlet.code;
 
-import java.io.File;
-import java.util.*;
+import java.util.Map;
+import java.util.SortedMap;
+import java.util.SortedSet;
+import java.util.TreeSet;
+import java.util.TreeMap;
 
 public class Differ {
     public static String generate(String filepath1, String filepath2, String format) throws Exception {
@@ -44,7 +47,7 @@ public class Differ {
             return "'" + obj.toString() + "'";
         }
 
-        if (obj instanceof Map<?,?> || obj instanceof Object[] || obj instanceof Iterable<?>) {
+        if (obj instanceof Map<?, ?> || obj instanceof Object[] || obj instanceof Iterable<?>) {
             return "[complex value]";
         }
 
