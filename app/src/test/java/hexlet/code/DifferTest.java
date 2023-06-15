@@ -38,7 +38,7 @@ public class DifferTest {
         sb.append("  + oceans: [North Atlantic, Indian, Pacific]\n");
         sb.append("  - period: {beginning=1500, end=1830}\n");
         sb.append("  + period: {beginning=1650, end=1730}\n");
-        sb.append("  + pirates: [Henry Every, Anne Bonny]\n");
+        sb.append("  + pirates: Henry Every\n");
         sb.append("  - region: the Caribbean\n    topic: piracy\n}");
         String expected1 = sb.toString();
 
@@ -53,6 +53,17 @@ public class DifferTest {
         expected2 = expected2 + "    id: 1234567\n    middleName: Connor\n    secondName: Black\n}";
 
         assertEquals(expected2, diff3);
+
+        StringBuilder sb1 = new StringBuilder();
+        sb1.append("Property 'oceans' was updated. From [complex value] to [complex value]\n");
+        sb1.append("Property 'period' was updated. From [complex value] to [complex value]\n");
+        sb1.append("Property 'pirates' was added with value: 'Henry Every'\n");
+        sb1.append("Property 'region' was removed\n");
+        String expected3 = sb1.toString();
+
+        String diff4 = Differ.generate(json1, json2, "plain");
+
+        assertEquals(expected3, diff4);
 
     }
 }

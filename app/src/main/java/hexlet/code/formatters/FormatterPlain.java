@@ -33,7 +33,7 @@ public class FormatterPlain {
     }
 
     public static String formatAdded(Map<String, String> data, String key, String keyAndStatus) {
-        String value = checkIfComplex(data.get(keyAndStatus));
+        String value = (data.get(keyAndStatus));
         return "Property '" + key + "' was added with value: " + value + "\n";
     }
 
@@ -42,15 +42,8 @@ public class FormatterPlain {
     }
 
     public static String formatChanged(Map<String, String> data, String key, String keyAndStatus) {
-        String value1 = checkIfComplex(data.get(keyAndStatus).split("/")[0]);
-        String value2 = checkIfComplex(data.get(keyAndStatus).split("/")[1]);
+        String value1 = (data.get(keyAndStatus).split("/")[0]);
+        String value2 = (data.get(keyAndStatus).split("/")[1]);
         return "Property '" + key + "' was updated. From " + value1 + " to " + value2 + "\n";
-    }
-
-    public static String checkIfComplex(String value) {
-        if (value.substring(0, 1).equals("[") || value.substring(0, 1).equals("{")) {
-            return "[complex value]";
-        }
-        return value;
     }
 }

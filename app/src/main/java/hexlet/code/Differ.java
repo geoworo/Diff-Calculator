@@ -1,10 +1,7 @@
 package hexlet.code;
 
-import java.util.SortedSet;
-import java.util.Map;
-import java.util.SortedMap;
-import java.util.TreeSet;
-import java.util.TreeMap;
+import java.io.File;
+import java.util.*;
 
 public class Differ {
     public static String generate(String filepath1, String filepath2, String format) throws Exception {
@@ -19,16 +16,16 @@ public class Differ {
         for (String key: sum) {
 
             if (!map1.containsKey(key)) {
-                result.put(key + "/a", (map2.get(key)).toString());
+                result.put(key + "/a", transform(map2.get(key), format));
                 // a = added
             } else if (!map2.containsKey(key)) {
-                result.put(key + "/d", (map1.get(key)).toString());
+                result.put(key + "/d", transform(map1.get(key), format));
                 // d = deleted
             } else if (map1.get(key).equals(map2.get(key))) {
-                result.put(key + "/u", (map1.get(key)).toString());
+                result.put(key + "/u", transform(map1.get(key), format));
                 // u = unchanged
             } else {
-                result.put(key + "/c", (map1.get(key)).toString() + "/" + (map2.get(key)).toString());
+                result.put(key + "/c", (transform(map1.get(key), format)) + "/" + transform(map2.get(key), format));
                 // c = changed
             }
 
@@ -36,5 +33,21 @@ public class Differ {
 
         return Formatter.format(result, format);
 
+    }
+
+    public static String transform(Object obj, String format) {
+        if (format.equals("stylish")) {
+            return obj.toString();
+        }
+
+        if (obj instanceof String) {
+            return "'" + obj.toString() + "'";
+        }
+
+        if (obj instanceof Map<?,?> || obj instanceof Object[] || obj instanceof Iterable<?>) {
+            return "[complex value]";
+        }
+
+        return obj.toString();
     }
 }
