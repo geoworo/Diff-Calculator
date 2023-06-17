@@ -58,12 +58,43 @@ public class DifferTest {
         sb1.append("Property 'oceans' was updated. From [complex value] to [complex value]\n");
         sb1.append("Property 'period' was updated. From [complex value] to [complex value]\n");
         sb1.append("Property 'pirates' was added with value: 'Henry Every'\n");
-        sb1.append("Property 'region' was removed\n");
+        sb1.append("Property 'region' was removed");
         String expected3 = sb1.toString();
 
         String diff4 = Differ.generate(json1, json2, "plain");
 
         assertEquals(expected3, diff4);
+
+        StringBuilder sb2 = new StringBuilder();
+        sb2.append("{\n" +
+                "  \"oceans\" : {\n" +
+                "    \"FirstFile\" : [ \"Pacific\", \"Atlantic\", \"Indian\", \"Southern\", \"Arctic\" ],\n" +
+                "    \"SecondFile\" : [ \"North Atlantic\", \"Indian\", \"Pacific\" ]\n" +
+                "  },\n" +
+                "  \"period\" : {\n" +
+                "    \"FirstFile\" : {\n" +
+                "      \"beginning\" : 1500,\n" +
+                "      \"end\" : 1830\n" +
+                "    },\n" +
+                "    \"SecondFile\" : {\n" +
+                "      \"beginning\" : 1650,\n" +
+                "      \"end\" : 1730\n" +
+                "    }\n" +
+                "  },\n" +
+                "  \"pirates\" : {\n" +
+                "    \"SecondFile\" : \"Henry Every\"\n" +
+                "  },\n" +
+                "  \"region\" : {\n" +
+                "    \"FirstFile\" : \"the Caribbean\"\n" +
+                "  },\n" +
+                "  \"topic\" : {\n" +
+                "    \"FirstFile\" : \"piracy\",\n" +
+                "    \"SecondFile\" : \"piracy\"\n" +
+                "  }\n" +
+                "}\n");
+
+        String expected = sb2.toString();
+        String actual = Differ.generate(json1, json2, "json");
 
     }
 }

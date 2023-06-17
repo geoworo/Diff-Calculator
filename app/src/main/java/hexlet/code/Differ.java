@@ -1,5 +1,7 @@
 package hexlet.code;
 
+import com.sun.source.tree.Tree;
+
 import java.util.Map;
 import java.util.SortedMap;
 import java.util.SortedSet;
@@ -8,49 +10,28 @@ import java.util.TreeMap;
 
 public class Differ {
     public static String generate(String filepath1, String filepath2, String format) throws Exception {
+
         Map<String, Object> map1 = Parser.parse(filepath1);
         Map<String, Object> map2 = Parser.parse(filepath2);
 
         SortedSet<String> sum = new TreeSet<>(map1.keySet());
         sum.addAll(map2.keySet());
 
-        SortedMap<String, String> result = new TreeMap<>();
+        SortedMap<String, Map<String, Object>> result = new TreeMap<>();
 
         for (String key: sum) {
-
+            Map<String, Object> values = new TreeMap<>();
             if (!map1.containsKey(key)) {
-                result.put(key + "/a", transform(map2.get(key), format));
-                // a = added
+                values.put("SecondFile", map2.get(key));
             } else if (!map2.containsKey(key)) {
-                result.put(key + "/d", transform(map1.get(key), format));
-                // d = deleted
-            } else if (map1.get(key).equals(map2.get(key))) {
-                result.put(key + "/u", transform(map1.get(key), format));
-                // u = unchanged
+                values.put("FirstFile", map1.get(key));
             } else {
-                result.put(key + "/c", (transform(map1.get(key), format)) + "/" + transform(map2.get(key), format));
-                // c = changed
+                values.put("FirstFile", map1.get(key));
+                values.put("SecondFile", map2.get(key));
             }
-
+            result.put(key, values);
         }
 
         return Formatter.format(result, format);
-
-    }
-
-    public static String transform(Object obj, String format) {
-        if (format.equals("stylish")) {
-            return obj.toString();
-        }
-
-        if (obj instanceof String) {
-            return "'" + obj.toString() + "'";
-        }
-
-        if (obj instanceof Map<?, ?> || obj instanceof Object[] || obj instanceof Iterable<?>) {
-            return "[complex value]";
-        }
-
-        return obj.toString();
     }
 }
