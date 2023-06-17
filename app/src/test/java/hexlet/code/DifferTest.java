@@ -76,10 +76,11 @@ public class DifferTest {
         sb2.append("\"SecondFile\" : \"Henry Every\"\n  },\n  \"region\" : {\n");
         sb2.append("    \"FirstFile\" : \"the Caribbean\"\n  },\n  ");
         sb2.append("\"topic\" : {\n    \"FirstFile\" : \"piracy\",\n");
-        sb2.append("    \"SecondFile\" : \"piracy\"\n  }\n}\n");
+        sb2.append("    \"SecondFile\" : \"piracy\"\n  }\n}");
 
         String expected = sb2.toString();
         String actual = Differ.generate(json1, json2, "json");
+        assertEquals(expected, actual);
 
     }
 }
