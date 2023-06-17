@@ -66,32 +66,12 @@ public class DifferTest {
         assertEquals(expected3, diff4);
 
         StringBuilder sb2 = new StringBuilder();
-        sb2.append("{\n" +
-                "  \"oceans\" : {\n" +
-                "    \"FirstFile\" : [ \"Pacific\", \"Atlantic\", \"Indian\", \"Southern\", \"Arctic\" ],\n" +
-                "    \"SecondFile\" : [ \"North Atlantic\", \"Indian\", \"Pacific\" ]\n" +
-                "  },\n" +
-                "  \"period\" : {\n" +
-                "    \"FirstFile\" : {\n" +
-                "      \"beginning\" : 1500,\n" +
-                "      \"end\" : 1830\n" +
-                "    },\n" +
-                "    \"SecondFile\" : {\n" +
-                "      \"beginning\" : 1650,\n" +
-                "      \"end\" : 1730\n" +
-                "    }\n" +
-                "  },\n" +
-                "  \"pirates\" : {\n" +
-                "    \"SecondFile\" : \"Henry Every\"\n" +
-                "  },\n" +
-                "  \"region\" : {\n" +
-                "    \"FirstFile\" : \"the Caribbean\"\n" +
-                "  },\n" +
-                "  \"topic\" : {\n" +
-                "    \"FirstFile\" : \"piracy\",\n" +
-                "    \"SecondFile\" : \"piracy\"\n" +
-                "  }\n" +
-                "}\n");
+        sb2.append("{\n  \"oceans\" : {\n    \"FirstFile\" : [ \"Pacific\", \"Atlantic\", \"Indian\", \"Southern\", \"Arctic\" ],\n");
+        sb2.append("    \"SecondFile\" : [ \"North Atlantic\", \"Indian\", \"Pacific\" ]\n  },\n  \"period\" : {\n    \"FirstFile\" : {\n");
+        sb2.append("      \"beginning\" : 1500,\n      \"end\" : 1830\n    },\n    \"SecondFile\" : {\n      \"beginning\" : 1650,\n");
+        sb2.append("      \"end\" : 1730\n    }\n  },\n  \"pirates\" : {\n    \"SecondFile\" : \"Henry Every\"\n  },\n  \"region\" : {\n");
+        sb2.append("    \"FirstFile\" : \"the Caribbean\"\n  },\n  \"topic\" : {\n    \"FirstFile\" : \"piracy\",\n");
+        sb2.append("    \"SecondFile\" : \"piracy\"\n  }\n}\n");
 
         String expected = sb2.toString();
         String actual = Differ.generate(json1, json2, "json");
