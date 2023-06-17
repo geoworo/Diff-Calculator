@@ -30,7 +30,7 @@ public class FormatterPlain {
     public static String transformValue(Object value) {
         if (value instanceof String) {
             return "'" + value + "'";
-        } else if (value instanceof Map<?,?> || value instanceof Iterable<?>) {
+        } else if (value instanceof Map<?, ?> || value instanceof Iterable<?>) {
             return "[complex value]";
         } else {
             return value.toString();

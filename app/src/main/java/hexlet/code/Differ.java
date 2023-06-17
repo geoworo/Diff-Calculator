@@ -1,7 +1,5 @@
 package hexlet.code;
 
-import com.sun.source.tree.Tree;
-
 import java.util.Map;
 import java.util.SortedMap;
 import java.util.SortedSet;
