@@ -5,3 +5,10 @@
 
 [![Test Coverage](https://api.codeclimate.com/v1/badges/0cc279d1934371289953/test_coverage)](https://codeclimate.com/github/geoworo/java-project-71/test_coverage)
 
+# Diff Calcularor
+
+A simple command line applet that calculates diff between two JSON or YAML files.
+The applet supports three output formats: plain, stylish, and json.
+
+**A demonstration:**
+[![asciicast](https://asciinema.org/a/ZegbxobPwDC2S8hrhN9ofHOXk.svg)](https://asciinema.org/a/ZegbxobPwDC2S8hrhN9ofHOXk)
