@@ -27,7 +27,7 @@ public class FormatterStylish {
                     sb.append("\n");
                     break;
                 default:
-                    sb.append("    " + map.get("key") + ": " + map.get("value"));
+                    sb.append("    " + map.get("key") + ": " + map.get("value1"));
                     sb.append("\n");
                     break;
             }
