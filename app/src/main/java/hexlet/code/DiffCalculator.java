@@ -25,7 +25,7 @@ public class DiffCalculator {
             } else if (map1.get(key).equals(map2.get(key))) {
                 map.put("status", "unchanged");
                 map.put("value1", map1.get(key));
-                map.put("value2", map2.get(key))
+                map.put("value2", map2.get(key));
             } else {
                 map.put("status", "changed");
                 map.put("value1", map1.get(key));
