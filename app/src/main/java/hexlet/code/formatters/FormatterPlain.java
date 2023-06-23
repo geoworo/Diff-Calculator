@@ -1,24 +1,30 @@
 package hexlet.code.formatters;
 
 import java.util.Map;
+import java.util.List;
 
 public class FormatterPlain {
-    public static String formatAsPlain(Map<String, Map<String, Object>> data) throws Exception {
+    public static String formatAsPlain(List<Map<String, Object>> data) {
 
         StringBuilder sb = new StringBuilder();
 
-        for (var key : data.keySet()) {
-            Map<String, Object> values = data.get(key);
-
-            if (!values.containsKey("FirstFile")) {
-                String value2 = transformValue(values.get("SecondFile"));
-                sb.append("Property '" + key + "' was added with value: " + value2);
-            } else if (!values.containsKey("SecondFile")) {
-                sb.append("Property '" + key + "' was removed");
-            } else if (!values.get("FirstFile").equals(values.get("SecondFile"))) {
-                String value1 = transformValue(values.get("FirstFile"));
-                String value2 = transformValue(values.get("SecondFile"));
-                sb.append("Property '" + key + "' was updated. From " + value1 + " to " + value2);
+        for (var map: data) {
+            String type = map.get("status").toString();
+            switch (type) {
+                case "changed":
+                    String value1 = transformValue(map.get("value1"));
+                    String value2 = transformValue(map.get("value2"));
+                    sb.append("Property '" + map.get("key") + "' was updated. From " + value1 + " to " + value2);
+                    break;
+                case "removed":
+                    sb.append("Property '" + map.get("key") + "' was removed");
+                    break;
+                case "added":
+                    String value = transformValue(map.get("value"));
+                    sb.append("Property '" + map.get("key") + "' was added with value: " + value);
+                    break;
+                default:
+                    break;
             }
 
             sb.append("\n");

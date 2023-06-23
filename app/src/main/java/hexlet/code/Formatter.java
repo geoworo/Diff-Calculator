@@ -5,9 +5,10 @@ import hexlet.code.formatters.FormatterPlain;
 import hexlet.code.formatters.FormatterStylish;
 
 import java.util.Map;
+import java.util.List;
 
 public class Formatter {
-    public static String format(Map<String, Map<String, Object>> data, String format) throws Exception {
+    public static String format(List<Map<String, Object>> data, String format) throws Exception {
         switch (format) {
             case "stylish":
                 return FormatterStylish.formatAsStylish(data);

@@ -1,10 +1,7 @@
 package hexlet.code;
 
 import java.util.Map;
-import java.util.SortedMap;
-import java.util.SortedSet;
-import java.util.TreeSet;
-import java.util.TreeMap;
+import java.util.List;
 
 public class Differ {
     public static String generate(String filepath1, String filepath2, String format) throws Exception {
@@ -12,25 +9,10 @@ public class Differ {
         Map<String, Object> map1 = Parser.parse(filepath1);
         Map<String, Object> map2 = Parser.parse(filepath2);
 
-        SortedSet<String> sum = new TreeSet<>(map1.keySet());
-        sum.addAll(map2.keySet());
+        List<Map<String, Object>> list = DiffCalculator.calculateDifference(map1, map2);
 
-        SortedMap<String, Map<String, Object>> result = new TreeMap<>();
+        return Formatter.format(list, format);
 
-        for (String key: sum) {
-            Map<String, Object> values = new TreeMap<>();
-            if (!map1.containsKey(key)) {
-                values.put("SecondFile", map2.get(key));
-            } else if (!map2.containsKey(key)) {
-                values.put("FirstFile", map1.get(key));
-            } else {
-                values.put("FirstFile", map1.get(key));
-                values.put("SecondFile", map2.get(key));
-            }
-            result.put(key, values);
-        }
-
-        return Formatter.format(result, format);
     }
 
     public static String generate(String filepath1, String filepath2) throws Exception {
