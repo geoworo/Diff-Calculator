@@ -9,7 +9,7 @@ public class FormatterPlain {
         StringBuilder sb = new StringBuilder();
 
         for (var map: data) {
-            String type = map.get("status").toString();
+            String type = map.get("type").toString();
             switch (type) {
                 case "changed":
                     String value1 = transformValue(map.get("value1"));

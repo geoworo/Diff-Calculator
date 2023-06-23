@@ -8,7 +8,7 @@ public class FormatterStylish {
         StringBuilder sb = new StringBuilder("{\n");
 
         for (var map: data) {
-            String type = map.get("status").toString();
+            String type = map.get("type").toString();
             switch (type) {
                 case "changed":
                     String value1 = map.get("value1").toString();
