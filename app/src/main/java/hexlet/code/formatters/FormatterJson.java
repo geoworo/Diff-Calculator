@@ -11,7 +11,6 @@ public class FormatterJson {
         try {
             return om.writerWithDefaultPrettyPrinter()
                     .writeValueAsString(data);
-
         } catch (Exception e) {
             throw new Exception("Json file could not be generated");
         }
