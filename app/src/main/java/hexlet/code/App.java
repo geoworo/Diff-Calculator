@@ -9,23 +9,21 @@ import java.util.concurrent.Callable;
 
 @Command(name = "gendiff", description = "Compares two configuration files and shows a difference.")
 
-public class App implements Callable<Integer> {
+public final class App implements Callable<Integer> {
 
     @Parameters(paramLabel = "filepath1", description = "path to first file")
-    static
-        String path1;
+    static private String path1;
     @Parameters(paramLabel = "filepath2", description = "path to second file")
-    static
-        String path2;
+    static private String path2;
     @Option(names = {"-f", "--format"}, defaultValue = "stylish",
             description = "output format (default: stylish)")
-        String format;
+    static private String format;
 
     @Option(names = {"-h", "--help"}, usageHelp = true, description = "Show this help message and exit.")
-    boolean usageHelpRequested = false;
+    static private boolean usageHelpRequested = false;
 
     @Option(names = {"-V", "--version"}, versionHelp = true, description = "Print version information and exit.")
-    boolean versionInfoRequested;
+    static private boolean versionInfoRequested;
 
 
 

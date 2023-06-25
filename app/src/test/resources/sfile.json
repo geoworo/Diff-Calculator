@@ -1,9 +1,0 @@
-{
-	"topic": "piracy",
-	"oceans": ["North Atlantic", "Indian", "Pacific"],
-	"period": {
-		"beginning": 1650,
-		"end": 1730
-	},
-	"pirates": "Henry Every"
-}
