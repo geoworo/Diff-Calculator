@@ -12,18 +12,18 @@ import java.util.concurrent.Callable;
 public final class App implements Callable<Integer> {
 
     @Parameters(paramLabel = "filepath1", description = "path to first file")
-    static private String path1;
+    private static String path1;
     @Parameters(paramLabel = "filepath2", description = "path to second file")
-    static private String path2;
+    private static String path2;
     @Option(names = {"-f", "--format"}, defaultValue = "stylish",
             description = "output format (default: stylish)")
-    static private String format;
+    private static String format;
 
     @Option(names = {"-h", "--help"}, usageHelp = true, description = "Show this help message and exit.")
-    static private boolean usageHelpRequested = false;
+    private static boolean usageHelpRequested = false;
 
     @Option(names = {"-V", "--version"}, versionHelp = true, description = "Print version information and exit.")
-    static private boolean versionInfoRequested;
+    private static boolean versionInfoRequested;
 
 
 

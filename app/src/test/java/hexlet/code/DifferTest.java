@@ -19,28 +19,28 @@ public class DifferTest {
     static final Path PLAIN_PATH = Path.of("src/test/resources/resultplain.txt");
     static final Path JSON_PATH = Path.of("src/test/resources/resultjson.txt");
 
-    static String RESULT_PLAIN;
-    static String RESULT_STYLISH;
-    static String RESULT_JSON;
+    static String plainresult;
+    static String stylishresult;
+    static String jsonresult;
 
     @BeforeAll
 
     public static void beforeEach() throws Exception {
-        RESULT_PLAIN = Files.readString(PLAIN_PATH);
-        RESULT_STYLISH = Files.readString(STYLISH_PATH);
-        RESULT_JSON = Files.readString(JSON_PATH);
+        plainresult = Files.readString(PLAIN_PATH);
+        stylishresult = Files.readString(STYLISH_PATH);
+        jsonresult = Files.readString(JSON_PATH);
     }
 
     @Test
 
     public void testGen() throws Exception {
-        assertEquals(RESULT_STYLISH, Differ.generate(FILE1_JSON, FILE2_JSON));
-        assertEquals(RESULT_STYLISH, Differ.generate(FILE1_YAML, FILE2_YAML));
+        assertEquals(stylishresult, Differ.generate(FILE1_JSON, FILE2_JSON));
+        assertEquals(stylishresult, Differ.generate(FILE1_YAML, FILE2_YAML));
 
-        assertEquals(RESULT_PLAIN, Differ.generate(FILE1_JSON, FILE2_JSON, "plain"));
-        assertEquals(RESULT_PLAIN, Differ.generate(FILE1_YAML, FILE2_YAML, "plain"));
+        assertEquals(plainresult, Differ.generate(FILE1_JSON, FILE2_JSON, "plain"));
+        assertEquals(plainresult, Differ.generate(FILE1_YAML, FILE2_YAML, "plain"));
 
-        assertEquals(RESULT_JSON, Differ.generate(FILE1_JSON, FILE2_JSON, "json"));
-        assertEquals(RESULT_JSON, Differ.generate(FILE1_YAML, FILE2_YAML, "json"));
+        assertEquals(jsonresult, Differ.generate(FILE1_JSON, FILE2_JSON, "json"));
+        assertEquals(jsonresult, Differ.generate(FILE1_YAML, FILE2_YAML, "json"));
     }
 }
