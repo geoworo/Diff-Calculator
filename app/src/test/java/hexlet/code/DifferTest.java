@@ -19,9 +19,9 @@ public class DifferTest {
     static final Path PLAIN_PATH = Path.of("src/test/resources/resultplain.txt");
     static final Path JSON_PATH = Path.of("src/test/resources/resultjson.txt");
 
-    static String plainresult;
-    static String stylishresult;
-    static String jsonresult;
+    private static String plainresult;
+    private static String stylishresult;
+    private static String jsonresult;
 
     @BeforeAll
 
