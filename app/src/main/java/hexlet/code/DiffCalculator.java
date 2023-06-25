@@ -22,18 +22,34 @@ public class DiffCalculator {
             } else if (!map2.containsKey(key)) {
                 map.put("type", "removed");
                 map.put("value", map1.get(key));
-            } else if (map1.get(key).equals(map2.get(key))) {
-                map.put("type", "unchanged");
-                map.put("value1", map1.get(key));
-                map.put("value2", map2.get(key));
             } else {
-                map.put("type", "changed");
-                map.put("value1", map1.get(key));
-                map.put("value2", map2.get(key));
+                if (checkIfNull(map1.get(key)) && checkIfNull(map2.get(key))) {
+                    map.put("type", "unchanged");
+                    map.put("value1", map1.get(key));
+                    map.put("value2", map2.get(key));
+                } else if (checkIfNull(map1.get(key)) || checkIfNull(map2.get(key))) {
+                    map.put("type", "changed");
+                    map.put("value1", map1.get(key));
+                    map.put("value2", map2.get(key));
+                } else {
+                    if (!map1.get(key).equals(map2.get(key))) {
+                        map.put("type", "changed");
+                        map.put("value1", map1.get(key));
+                        map.put("value2", map2.get(key));
+                    } else {
+                        map.put("type", "unchanged");
+                        map.put("value1", map1.get(key));
+                        map.put("value2", map2.get(key));
+                    }
+                }
             }
             result.add(map);
         }
 
         return result;
+    }
+
+    public static boolean checkIfNull(Object obj) {
+        return obj == null;
     }
 }

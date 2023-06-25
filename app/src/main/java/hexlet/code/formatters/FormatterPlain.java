@@ -15,19 +15,20 @@ public class FormatterPlain {
                     String value1 = transformValue(map.get("value1"));
                     String value2 = transformValue(map.get("value2"));
                     sb.append("Property '" + map.get("key") + "' was updated. From " + value1 + " to " + value2);
+                    sb.append("\n");
                     break;
                 case "removed":
                     sb.append("Property '" + map.get("key") + "' was removed");
+                    sb.append("\n");
                     break;
                 case "added":
                     String value = transformValue(map.get("value"));
                     sb.append("Property '" + map.get("key") + "' was added with value: " + value);
+                    sb.append("\n");
                     break;
                 default:
                     break;
             }
-
-            sb.append("\n");
         }
 
         return sb.toString().trim();
@@ -38,6 +39,8 @@ public class FormatterPlain {
             return "'" + value + "'";
         } else if (value instanceof Map<?, ?> || value instanceof Iterable<?>) {
             return "[complex value]";
+        } else if (value == null) {
+            return "null";
         } else {
             return value.toString();
         }
