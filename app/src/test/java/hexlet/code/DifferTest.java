@@ -14,45 +14,45 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class DifferTest {
 
-    private static String FILE1_JSON;
-    private static String FILE2_JSON;
-    private static String FILE1_YAML;
-    private static String FILE2_YAML;
+    private static String file1json;
+    private static String file2json;
+    private static String file1yml;
+    private static String file2yml;
 
-    private static String PLAIN_RESULT;
-    private static String STYLISH_RESULT;
-    private static List<Map<String, Object>> JSON_RESULT;
+    private static String plainResult;
+    private static String stylishResult;
+    private static List<Map<String, Object>> jsonResult;
 
     @BeforeAll
 
     public static void beforeEach() throws Exception {
-        FILE1_JSON = getFilePath("test1.json");
-        FILE2_JSON = getFilePath("test2.json");
-        FILE1_YAML = getFilePath("test1.yml");
-        FILE2_YAML = getFilePath("test2.yml");
+        file1json = getFilePath("test1.json");
+        file2json = getFilePath("test2.json");
+        file1yml = getFilePath("test1.yml");
+        file2yml = getFilePath("test2.yml");
 
-        PLAIN_RESULT = getContent("resultplain.txt");
-        STYLISH_RESULT = getContent("resultstylish.txt");
+        plainResult = getContent("resultplain.txt");
+        stylishResult = getContent("resultstylish.txt");
 
-        JSON_RESULT = getMap(getContent("result.json"));
+        jsonResult = getMap(getContent("result.json"));
     }
 
     @Test
 
     public void testGen() throws Exception {
-        assertEquals(STYLISH_RESULT, Differ.generate(FILE1_JSON, FILE2_JSON));
-        assertEquals(STYLISH_RESULT, Differ.generate(FILE1_YAML, FILE2_YAML));
+        assertEquals(stylishResult, Differ.generate(file1json, file2json));
+        assertEquals(stylishResult, Differ.generate(file1yml, file2yml));
 
-        assertEquals(STYLISH_RESULT, Differ.generate(FILE1_JSON, FILE2_JSON), "stylish");
-        assertEquals(STYLISH_RESULT, Differ.generate(FILE1_YAML, FILE2_YAML), "stylish");
+        assertEquals(stylishResult, Differ.generate(file1json, file2json), "stylish");
+        assertEquals(stylishResult, Differ.generate(file1yml, file2yml), "stylish");
 
-        assertEquals(PLAIN_RESULT, Differ.generate(FILE1_JSON, FILE2_JSON, "plain"));
-        assertEquals(PLAIN_RESULT, Differ.generate(FILE1_YAML, FILE2_YAML, "plain"));
+        assertEquals(plainResult, Differ.generate(file1json, file2json, "plain"));
+        assertEquals(plainResult, Differ.generate(file1yml, file2yml, "plain"));
 
-        var actualjson1 = getMap(Differ.generate(FILE1_JSON, FILE2_JSON, "json"));
-        var actualjson2 = getMap(Differ.generate(FILE1_YAML, FILE2_YAML, "json"));
-        assertEquals(JSON_RESULT, actualjson1);
-        assertEquals(JSON_RESULT, actualjson2);
+        var actualjson1 = getMap(Differ.generate(file1json, file2json, "json"));
+        var actualjson2 = getMap(Differ.generate(file1yml, file2yml, "json"));
+        assertEquals(jsonResult, actualjson1);
+        assertEquals(jsonResult, actualjson2);
     }
 
     public static String getFilePath(String fileName) {
