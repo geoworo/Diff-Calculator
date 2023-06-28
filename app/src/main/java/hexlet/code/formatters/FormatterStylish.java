@@ -7,7 +7,7 @@ public class FormatterStylish {
     public static String formatAsStylish(List<Map<String, Object>> data) {
         StringBuilder sb = new StringBuilder("{\n");
 
-        for (var map: data) {
+        for (var map : data) {
             String type = map.get("type").toString();
             switch (type) {
                 case "changed":
@@ -27,7 +27,7 @@ public class FormatterStylish {
                     sb.append("\n");
                     break;
                 default:
-                    sb.append("    " + map.get("key") + ": " + map.get("value1"));
+                    sb.append("    " + map.get("key") + ": " + map.get("value"));
                     sb.append("\n");
                     break;
             }

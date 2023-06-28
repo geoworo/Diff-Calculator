@@ -1,11 +1,6 @@
 package hexlet.code;
 
-import java.util.Map;
-import java.util.TreeSet;
-import java.util.List;
-import java.util.SortedSet;
-import java.util.TreeMap;
-import java.util.ArrayList;
+import java.util.*;
 
 public class DiffCalculator {
     public static List<Map<String, Object>> calculateDifference(Map<String, Object> map1, Map<String, Object> map2) {
@@ -13,8 +8,8 @@ public class DiffCalculator {
         sum.addAll(map2.keySet());
         List<Map<String, Object>> result = new ArrayList<>();
 
-        for (String key: sum) {
-            Map<String, Object> map = new TreeMap<>();
+        for (String key : sum) {
+            Map<String, Object> map = new LinkedHashMap<>();
             map.put("key", key);
             if (!map1.containsKey(key)) {
                 map.put("type", "added");
@@ -23,24 +18,13 @@ public class DiffCalculator {
                 map.put("type", "removed");
                 map.put("value", map1.get(key));
             } else {
-                if (checkIfNull(map1.get(key)) && checkIfNull(map2.get(key))) {
+                if (areEqual(map1.get(key), map2.get(key))) {
                     map.put("type", "unchanged");
-                    map.put("value1", map1.get(key));
-                    map.put("value2", map2.get(key));
-                } else if (checkIfNull(map1.get(key)) || checkIfNull(map2.get(key))) {
+                    map.put("value", map1.get(key));
+                } else {
                     map.put("type", "changed");
                     map.put("value1", map1.get(key));
                     map.put("value2", map2.get(key));
-                } else {
-                    if (!map1.get(key).equals(map2.get(key))) {
-                        map.put("type", "changed");
-                        map.put("value1", map1.get(key));
-                        map.put("value2", map2.get(key));
-                    } else {
-                        map.put("type", "unchanged");
-                        map.put("value1", map1.get(key));
-                        map.put("value2", map2.get(key));
-                    }
                 }
             }
             result.add(map);
@@ -49,7 +33,13 @@ public class DiffCalculator {
         return result;
     }
 
-    public static boolean checkIfNull(Object obj) {
-        return obj == null;
+    public static boolean areEqual(Object obj1, Object obj2) {
+        if (obj1 == null && obj2 == null) {
+            return true;
+        } else if (obj1 == null || obj2 == null) {
+            return false;
+        } else {
+            return obj1.equals(obj2);
+        }
     }
 }
