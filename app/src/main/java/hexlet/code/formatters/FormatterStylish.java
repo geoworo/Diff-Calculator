@@ -11,8 +11,8 @@ public class FormatterStylish {
             String type = map.get("type").toString();
             switch (type) {
                 case "changed":
-                    String value1 = transform(map.get("value1"));
-                    String value2 = transform(map.get("value2"));
+                    String value1 = stringify(map.get("value1"));
+                    String value2 = stringify(map.get("value2"));
                     sb.append("  - " + map.get("key") + ": " + value1);
                     sb.append("\n");
                     sb.append("  + " + map.get("key") + ": " + value2);
@@ -39,7 +39,7 @@ public class FormatterStylish {
         return sb.toString();
     }
 
-    public static String transform(Object obj) {
+    private static String stringify(Object obj) {
         if (obj == null) {
             return "null";
         } else {

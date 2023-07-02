@@ -19,7 +19,7 @@ public class DifferTest {
 
     private static String plainResult;
     private static String stylishResult;
-    private static  JsonNode jsonResult;
+    private static JsonNode jsonResult;
 
     @BeforeAll
 
@@ -38,8 +38,7 @@ public class DifferTest {
     }
 
     @Test
-
-    public void testGen() throws Exception {
+    public void generateTest() throws Exception {
         ObjectMapper om = new ObjectMapper();
 
         assertEquals(stylishResult, Differ.generate(file1json, file2json));

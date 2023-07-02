@@ -36,7 +36,7 @@ public class DiffCalculator {
         return result;
     }
 
-    public static boolean areEqual(Object obj1, Object obj2) {
+    private static boolean areEqual(Object obj1, Object obj2) {
         if (obj1 == null && obj2 == null) {
             return true;
         } else if (obj1 == null || obj2 == null) {
