@@ -7,7 +7,7 @@ import picocli.CommandLine.Parameters;
 
 import java.util.concurrent.Callable;
 
-@Command(name = "gendiff", mixinStandardHelpOptions = true, version = "gendiff 1.0",
+@Command(name = "gendiff", mixinStandardHelpOptions = true, version = "1.0",
         description = "Compares two configuration files and shows a difference.")
 
 public final class App implements Callable<Integer> {
@@ -17,10 +17,6 @@ public final class App implements Callable<Integer> {
     private static String path2;
     @Option(names = {"-f", "--format"}, defaultValue = "stylish", description = "output format (default: stylish)")
     private static String format;
-    @Option(names = {"-h", "--help"}, usageHelp = true, description = "Show this help message and exit.")
-    private static boolean usageHelpRequested = false;
-    @Option(names = {"-V", "--version"}, versionHelp = true, description = "Print version information and exit.")
-    private static boolean versionInfoRequested;
 
     @Override
     public Integer call() throws Exception {
@@ -37,13 +33,6 @@ public final class App implements Callable<Integer> {
         App app = CommandLine.populateCommand(new App(), args);
         CommandLine commandLine = new CommandLine(new App());
         commandLine.parseArgs(args);
-        if (usageHelpRequested) {
-            CommandLine.usage(new App(), System.out);
-            return;
-        } else if (commandLine.isVersionHelpRequested()) {
-            commandLine.printVersionHelp(System.out);
-            return;
-        }
         int exitCode = new CommandLine(new App()).execute(args);
         System.exit(exitCode);
     }

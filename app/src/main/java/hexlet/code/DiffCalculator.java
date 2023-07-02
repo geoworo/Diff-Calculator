@@ -22,15 +22,13 @@ public class DiffCalculator {
             } else if (!map2.containsKey(key)) {
                 map.put("type", "removed");
                 map.put("value", map1.get(key));
+            } else if (areEqual(map1.get(key), map2.get(key))) {
+                map.put("type", "unchanged");
+                map.put("value", map1.get(key));
             } else {
-                if (areEqual(map1.get(key), map2.get(key))) {
-                    map.put("type", "unchanged");
-                    map.put("value", map1.get(key));
-                } else {
-                    map.put("type", "changed");
-                    map.put("value1", map1.get(key));
-                    map.put("value2", map2.get(key));
-                }
+                map.put("type", "changed");
+                map.put("value1", map1.get(key));
+                map.put("value2", map2.get(key));
             }
             result.add(map);
         }

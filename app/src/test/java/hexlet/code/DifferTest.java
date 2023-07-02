@@ -1,14 +1,12 @@
 package hexlet.code;
 
-import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.List;
-import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -21,11 +19,13 @@ public class DifferTest {
 
     private static String plainResult;
     private static String stylishResult;
-    private static List<Map<String, Object>> jsonResult;
+    private static  JsonNode jsonResult;
 
     @BeforeAll
 
     public static void beforeEach() throws Exception {
+        ObjectMapper om = new ObjectMapper();
+
         file1json = getFilePath("test1.json");
         file2json = getFilePath("test2.json");
         file1yml = getFilePath("test1.yml");
@@ -34,12 +34,14 @@ public class DifferTest {
         plainResult = getContent("resultplain.txt");
         stylishResult = getContent("resultstylish.txt");
 
-        jsonResult = getMap(getContent("result.json"));
+        jsonResult = om.readTree(getContent("result.json"));
     }
 
     @Test
 
     public void testGen() throws Exception {
+        ObjectMapper om = new ObjectMapper();
+
         assertEquals(stylishResult, Differ.generate(file1json, file2json));
         assertEquals(stylishResult, Differ.generate(file1yml, file2yml));
 
@@ -49,8 +51,8 @@ public class DifferTest {
         assertEquals(plainResult, Differ.generate(file1json, file2json, "plain"));
         assertEquals(plainResult, Differ.generate(file1yml, file2yml, "plain"));
 
-        var actualjson1 = getMap(Differ.generate(file1json, file2json, "json"));
-        var actualjson2 = getMap(Differ.generate(file1yml, file2yml, "json"));
+        var actualjson1 = om.readTree(Differ.generate(file1json, file2json, "json"));
+        var actualjson2 = om.readTree(Differ.generate(file1yml, file2yml, "json"));
         assertEquals(jsonResult, actualjson1);
         assertEquals(jsonResult, actualjson2);
     }
@@ -62,13 +64,5 @@ public class DifferTest {
     public static String getContent(String fileName) throws Exception {
         Path path = Path.of(getFilePath(fileName));
         return Files.readString(path);
-    }
-
-    public static List<Map<String, Object>> getMap(String data) throws Exception {
-        ObjectMapper om = new ObjectMapper();
-        List<Map<String, Object>> list;
-        list = om.readValue(data, new TypeReference<>() {
-        });
-        return list;
     }
 }

@@ -4,7 +4,7 @@ import java.util.Map;
 import java.util.List;
 
 public class FormatterStylish {
-    public static String formatAsStylish(List<Map<String, Object>> data) {
+    public static String formatAsStylish(List<Map<String, Object>> data) throws Exception {
         StringBuilder sb = new StringBuilder("{\n");
 
         for (var map : data) {
@@ -26,10 +26,12 @@ public class FormatterStylish {
                     sb.append("  + " + map.get("key") + ": " + map.get("value"));
                     sb.append("\n");
                     break;
-                default:
+                case "unchanged":
                     sb.append("    " + map.get("key") + ": " + map.get("value"));
                     sb.append("\n");
                     break;
+                default:
+                    throw new Exception("Unknown status");
             }
         }
 

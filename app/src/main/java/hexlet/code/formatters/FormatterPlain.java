@@ -4,7 +4,7 @@ import java.util.Map;
 import java.util.List;
 
 public class FormatterPlain {
-    public static String formatAsPlain(List<Map<String, Object>> data) {
+    public static String formatAsPlain(List<Map<String, Object>> data) throws Exception {
 
         StringBuilder sb = new StringBuilder();
 
@@ -26,8 +26,10 @@ public class FormatterPlain {
                     sb.append("Property '" + map.get("key") + "' was added with value: " + value);
                     sb.append("\n");
                     break;
-                default:
+                case "unchanged":
                     break;
+                default:
+                    throw new Exception("Unknown status.");
             }
         }
 
