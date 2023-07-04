@@ -1,6 +1,5 @@
 package hexlet.code;
 
-import java.io.File;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -13,8 +12,8 @@ public class Differ {
         var path1 = getPath(filepath1);
         var path2 = getPath(filepath2);
 
-        var format1 = getFormat(path1);
-        var format2 = getFormat(path2);
+        var format1 = getFormat(filepath1);
+        var format2 = getFormat(filepath2);
 
         var map1 = Parser.parse(Files.readString(path1), format1);
         var map2 = Parser.parse(Files.readString(path2), format2);
@@ -33,10 +32,7 @@ public class Differ {
         return Paths.get(filepath).toAbsolutePath().normalize();
     }
 
-    private static String getFormat(Path path) {
-        File file = new File(String.valueOf(path));
-        String fileName = file.getName();
-        int index = fileName.lastIndexOf('.');
-        return fileName.substring(index + 1);
+    private static String getFormat(String path) {
+        return path.substring(path.lastIndexOf(".") + 1);
     }
 }

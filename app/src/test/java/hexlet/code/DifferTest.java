@@ -22,7 +22,6 @@ public class DifferTest {
     private static JsonNode jsonResult;
 
     @BeforeAll
-
     public static void beforeEach() throws Exception {
         ObjectMapper om = new ObjectMapper();
 
