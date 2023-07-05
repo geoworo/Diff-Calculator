@@ -10,14 +10,12 @@ The applet can be used as a separate command line program, or as a library.
 
 ### Using as a command line program:
 1. Download the files.
-2. Create a **\*.jar** file using `gradle clean installDist`.
-3. From the 'app' subdirectory, access the resulting **\*.jar** file:
-   ```
-   ./build/install/app/bin/app -h
-   ```
+2. Create a **\*.jar** file using the `make install` command.
+3. Access the resulting **\*.jar** file by using `make run-dist -h`.
+   
 ### Using as a library:
 1. Download the files.
-2. Create a **\*.jar** file using `gradle clean installDist`.
+2. Create a **\*.jar** file using the `make install` command.
 3. Place the file into the same folder as your source code.
 4. Import the needed class or package into your program. 
 
