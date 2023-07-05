@@ -4,6 +4,7 @@
 # Diff Calculator
 A simple command line applet that calculates diff between two JSON or YAML files.
 The applet supports three output formats: stylish (default), plain and json.
+**Stack:** Java SE 17, Makefile, Gradle 7, Git, GitHub Actions, Checkstyle, JUnit 5.
 
 ## Usage
 The applet can be used as a separate command line program, or as a library. 
